@@ -181,3 +181,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+/Loto.iml
+/misc.xml
+/inspectionProfiles/profiles_settings.xml
+/vcs.xml
