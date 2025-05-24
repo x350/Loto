@@ -15,12 +15,15 @@ def main():
     if args.common_players:
         users = int(args.common_players)
     table = Table(users)
-    table.add_users()
-    # table.__str__()
+    table.__str__()
+
     print('Созданы карточки игроков: ', table)
 
     table.game()
 #
+
+
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
