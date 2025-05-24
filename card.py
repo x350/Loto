@@ -1,16 +1,18 @@
 import numpy as np
 
+
 class Card:
     ''' Карточка лото. 15 случайных цифр, по 5 цифр в каждом ряду,
     цифры ранжировны по столбцам, по десяткам на каждый столбец,
     как на сайте  "Спортлото".
     '''
-    def __init__(self, user='', npc=True):
+
+    def __init__(self, user: str = '', npc: bool = True):
         self._card = self.make_random_array()
         self.user = user
         self._npc = npc
 
-    def make_random_array(self):
+    def make_random_array(self) -> np.array:
         # получение 15 случайных цифр (с учетом того, чтоб в каждый столбец помещались цифры одного десятка)
         border = [1, 10, 20, 30, 40, 50, 60, 70, 80, 91]
         rand = []
@@ -41,13 +43,13 @@ class Card:
                 # print('index1 -', index1, ' index2-', index2, ' item-', item)
                 arr_card[index1][index2] = arr_number[index1][item]
 
-         # Замена типа элементов на srt,
+        # Замена типа элементов на srt,
         card = arr_card.astype(np.str_)
         # Замена нулей пробелами
         card[card == '0'] = ' '
         return card
 
-    def print_card(self):
+    def print_card(self) -> None:
         print('-' * 8, f'Игрок {self.user}.', '-' * 9)
         for row in range(len(self._card)):
             for item in range(len(self._card[row])):
@@ -55,7 +57,7 @@ class Card:
             print('|')
         print('-' * 37)
 
-    def check_number_in_card(self, number):
+    def check_number_in_card(self, number: str) -> bool:
         for row in range(len(self._card)):
             for item in range(len(self._card[row])):
                 if self._card[row][item] == number:
@@ -63,12 +65,12 @@ class Card:
                     return True
         return False
 
-    def check_card_to_end(self):
+    def check_card_to_end(self) -> bool:
         for row in range(len(self._card)):
             for item in range(len(self._card[row])):
                 if self._card[row][item] != ' ' and self._card[row][item] != '✖':
                     return False
         return True
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.user
