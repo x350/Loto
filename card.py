@@ -2,18 +2,17 @@ import numpy as np
 
 
 class Card:
-    ''' Карточка лото. 15 случайных цифр, по 5 цифр в каждом ряду,
+    """ Карточка лото. 15 случайных цифр, по 5 цифр в каждом ряду,
     цифры ранжировны по столбцам, по десяткам на каждый столбец,
     как на сайте  "Спортлото".
-    '''
+    """
 
     def __init__(self, user: str = '', npc: bool = True):
-        self._card = self.make_random_array()
+        self._card = self.make_random_cards_array()
         self.user = user
         self._npc = npc
 
-    def make_random_array(self) -> np.array:
-        # получение 15 случайных цифр (с учетом того, чтоб в каждый столбец помещались цифры одного десятка)
+    def make_random_cards_array(self) -> np.array:
         border = [1, 10, 20, 30, 40, 50, 60, 70, 80, 91]
         rand = []
         for i in range(len(border) - 1):
@@ -25,7 +24,6 @@ class Card:
             index = np.random.randint(0, len(rand))
             del rand[index]
 
-        # # 1 создание матрицы по 5 чисел в строке, каждый десяток в своем столбце
         arr_number = [[], [], []]
         index1 = np.random.choice([0, 1, 2])
         for item in rand:
@@ -40,12 +38,9 @@ class Card:
                 index2 = arr_number[index1][item] // 10
                 if index2 == 9:
                     index2 = 8
-                # print('index1 -', index1, ' index2-', index2, ' item-', item)
                 arr_card[index1][index2] = arr_number[index1][item]
 
-        # Замена типа элементов на srt,
         card = arr_card.astype(np.str_)
-        # Замена нулей пробелами
         card[card == '0'] = ' '
         return card
 
