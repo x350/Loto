@@ -2,6 +2,8 @@ import pytest
 from pouch import Pouch
 from card import Card
 from table import Table
+
+
 @pytest.fixture
 def new_pouch():
     return Pouch()
@@ -15,5 +17,3 @@ def new_card():
 @pytest.fixture
 def new_table(users):
     return Table(users)
-
-
